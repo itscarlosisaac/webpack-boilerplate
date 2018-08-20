@@ -1,0 +1,11 @@
+{
+  "name": "webpack-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Carlos Martinez <itscarlosisaac@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.16.5",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
