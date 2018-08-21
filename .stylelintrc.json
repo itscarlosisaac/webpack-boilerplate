@@ -14,7 +14,7 @@
     "no-eol-whitespace": true,
     "string-no-newline": true,
     "declaration-colon-space-after": "always",
-    "indentation": ["tab", {
+    "indentation": [2, {
       "except": ["value"]
     }],
     "shorthand-property-no-redundant-values": true,

@@ -9,9 +9,8 @@
     "node": "8.11.3"
   },
   "scripts": {
-    "start": "nodemon src/app.js",
-    "dev": "webpack",
-    "serve": "webpack-dev-server ",
+    "dev": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.prod.js",
     "prestart": "eslint src/app.js",
     "pm2:start": "pm2 start process.yml",
     "pm2:monit": "pm2 monit process.yml"
