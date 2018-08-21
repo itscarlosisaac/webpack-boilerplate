@@ -1,0 +1,17 @@
+{
+    "root": true,
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+      "eqeqeq": "error",
+      "no-undef": 1,
+      "no-unused-vars": 1,
+      "no-console": "error",
+      "curly": "error",
+      "dot-location": ["error", "property"],
+      "no-restricted-modules": ["error", "jquery"]
+    }
+}

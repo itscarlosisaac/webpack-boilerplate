@@ -1,0 +1,42 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order",
+    "stylelint-images",
+    "stylelint-declaration-use-variable"
+  ],
+  "rules": {
+    "block-no-empty": null,
+    "color-no-invalid-hex": true,
+    "comment-empty-line-before": [ "always", {
+      "ignore": ["stylelint-commands", "after-comment"]
+    } ],
+    "no-eol-whitespace": true,
+    "string-no-newline": true,
+    "declaration-colon-space-after": "always",
+    "indentation": ["tab", {
+      "except": ["value"]
+    }],
+    "shorthand-property-no-redundant-values": true,
+    "max-empty-lines": 2,
+    "rule-empty-line-before": [ "always", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment"]
+    } ],
+    "unit-whitelist": ["px","em", "rem", "%", "deg", "s"],
+    "selector-attribute-quotes": "always",
+    "color-hex-case": "lower",
+    "color-named": "never",
+    "max-nesting-depth": 2,
+    "number-leading-zero": "always",
+    "property-case": "lower",
+    "color-hex-length": "long",
+    "selector-id-pattern": "#[a-z|A-Z|0-9|_|-]+",
+    "order/order": [
+			"custom-properties",
+			"declarations"
+    ],
+    "order/properties-alphabetical-order": true,
+    "images/broken": true
+  }
+}
