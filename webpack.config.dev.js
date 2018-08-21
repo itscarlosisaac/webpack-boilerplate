@@ -11,7 +11,7 @@ const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist');
 const devMode = process.env.NODE_ENV === 'development';
 
-module.exports = (env) => {
+module.exports = () => {
   const MiniCSSExtract = new MiniCssExtractPlugin({
     filename: '[name].css',
     chunkFilename: '[id].css',
@@ -32,7 +32,12 @@ module.exports = (env) => {
   });
 
   const HMR = new webpack.HotModuleReplacementPlugin();
-  const HTMLWebpackPlugin = new HtmlWebpackPlugin();
+  const HTMLWebpackPlugin = new HtmlWebpackPlugin({
+    meta: {
+      viewport: 'width=device-width, initial-scale=1',
+      charset: 'UTF-8',
+    },
+  });
 
   return {
     mode: 'development',
@@ -60,7 +65,7 @@ module.exports = (env) => {
         },
       ],
     },
-    devtool: devMode ? 'inline-source-map' : 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     plugins: [CopyWebpack, HMR, MiniCSSExtract, BSPlugin, HTMLWebpackPlugin, StyleLinter],
     devServer: {
       host: '0.0.0.0',
