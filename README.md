@@ -8,9 +8,13 @@ This project has branches for each type of web app.
 
 It uses the [Airbnb Javascript guidelines](https://github.com/airbnb/javascript) and their [CSS/SASS](https://github.com/airbnb/css) Style standards which uses the OOCSS and BEM approach to write better styles.
 
-## Usage
+## Scripts
 
-## What's included
+```yarn run prestart``` - It runs before each action to run eslint validator on the code.
+
+```yarn run dev``` - To run the development action.
+
+```yarn run build``` - To run the build action to the dist folder.
 
 ### Development dependencies
 ```
@@ -38,7 +42,6 @@ It uses the [Airbnb Javascript guidelines](https://github.com/airbnb/javascript)
   "node-sass": "^4.9.3",
   "nodemon": "^1.18.3",
   "normalize.css": "^8.0.0",
-  "pm2": "^3.0.3",
   "postcss-loader": "^3.0.0",
   "pre-commit": "^1.2.2",
   "sass-loader": "^7.1.0",
