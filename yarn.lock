@@ -129,6 +129,29 @@
   dependencies:
     "@types/babel-types" "*"
 
+"@types/node@*":
+  version "10.7.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
+
+"@types/tapable@^0":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@types/tapable/-/tapable-0.2.5.tgz#2443fc12da514c81346b1a665675559cee21fa75"
+
+"@types/uglify-js@*":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/uglify-js/-/uglify-js-3.0.3.tgz#801a5ca1dc642861f47c46d14b700ed2d610840b"
+  dependencies:
+    source-map "^0.6.1"
+
+"@types/webpack@^3.0.5":
+  version "3.8.14"
+  resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-3.8.14.tgz#e2bfdf7f604b3f7dc776eaa17446d7f7538f3de7"
+  dependencies:
+    "@types/node" "*"
+    "@types/tapable" "^0"
+    "@types/uglify-js" "*"
+    source-map "^0.6.0"
+
 "@webassemblyjs/ast@1.5.13":
   version "1.5.13"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.5.13.tgz#81155a570bd5803a30ec31436bc2c9c0ede38f25"
@@ -1707,7 +1730,7 @@ chokidar@1.7.0:
   optionalDependencies:
     fsevents "^1.0.0"
 
-chokidar@^2.0.0, chokidar@^2.0.2:
+chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.0.4.tgz#356ff4e2b0e8e43e322d18a372460bbcf3accd26"
   dependencies:
@@ -3790,6 +3813,13 @@ html-tags@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
 
+html-webpack-harddisk-plugin@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/html-webpack-harddisk-plugin/-/html-webpack-harddisk-plugin-0.2.0.tgz#465414a534219b69c1fd8127b585f8d86897fb2d"
+  dependencies:
+    "@types/webpack" "^3.0.5"
+    mkdirp "^0.5.1"
+
 html-webpack-plugin@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-3.2.0.tgz#b01abbd723acaaa7b37b6af4492ebda03d9dd37b"
@@ -4048,7 +4078,7 @@ internal-ip@1.2.0:
   dependencies:
     meow "^3.3.0"
 
-interpret@^1.1.0:
+interpret@^1.0.0, interpret@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
@@ -6363,7 +6393,7 @@ pug-walk@^1.0.0, pug-walk@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-1.1.7.tgz#c00d5c5128bac5806bec15d2b7e7cdabe42531f3"
 
-pug@^2.0.0-rc.2:
+pug@^2.0.0-rc.2, pug@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pug/-/pug-2.0.3.tgz#71cba82537c95a5eab7ed04696e4221f53aa878e"
   dependencies:
@@ -6578,6 +6608,12 @@ recast@~0.11.12:
     esprima "~3.1.0"
     private "~0.1.5"
     source-map "~0.5.0"
+
+rechoir@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
+  dependencies:
+    resolve "^1.1.6"
 
 redent@^1.0.0:
   version "1.0.0"
@@ -7133,6 +7169,14 @@ shebang-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
 
+shelljs@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.8.2.tgz#345b7df7763f4c2340d584abb532c5f752ca9e35"
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -7301,7 +7345,7 @@ source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@^0.5.7, sour
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 
-source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
+source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
 

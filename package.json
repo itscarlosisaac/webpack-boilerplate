@@ -9,9 +9,9 @@
     "node": "8.11.3"
   },
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.prod.js",
-    "prestart": "eslint src/app.js"
+    "prestart": "eslint src/app.js",
+    "start": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --config webpack.config.prod.js"
   },
   "pre-commit": [
     "prestart"

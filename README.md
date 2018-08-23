@@ -60,6 +60,4 @@ It uses the [Airbnb Javascript guidelines](https://github.com/airbnb/javascript)
 
 
 ## TODO
-- Create react branch
-- Create vue branch
-- Create Pug/Jade branch
+  - Restart node process when creating or deleting a new pug file in the views folder.

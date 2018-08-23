@@ -4,10 +4,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fs = require('fs');
 
 const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist');
 const devMode = process.env.NODE_ENV === 'development';
+const viewsFolder = path.resolve(__dirname, 'src/views/');
 
 module.exports = () => {
   const MiniCSSExtract = new MiniCssExtractPlugin({
@@ -20,15 +22,22 @@ module.exports = () => {
   ]);
 
   const StyleLinter = new StyleLintPlugin();
+  const HTMLWebpackPlugin = [];
+  const views = [
+    { name: 'index', src: 'index.pug' },
+  ];
 
-  const HTMLWebpackPlugin = new HtmlWebpackPlugin({
-    meta: {
-      viewport: 'width=device-width, initial-scale=1',
-      charset: 'UTF-8',
-    },
-    hash: true,
-    minify: true,
-  });
+  fs.readdirSync(viewsFolder).forEach(file => views.push({ name: file.replace('.pug', ''), src: `views/${file}` }));
+
+  const exportviews = (name, entryPath) => (
+    HTMLWebpackPlugin.push(new HtmlWebpackPlugin({
+      filename: `${name}.html`,
+      template: path.join(srcDir, entryPath),
+      minify: true,
+    }))
+  );
+
+  views.map(item => exportviews(item.name, item.src));
 
   return {
     mode: 'production',
@@ -43,7 +52,12 @@ module.exports = () => {
           loader: 'babel-loader',
           test: /\.js$/,
           exclude: /node_modules/,
-        },{
+        },
+        {
+          test: /\.pug$/,
+          loader: ['raw-loader', 'pug-html-loader'],
+        },
+        {
           test: /\.(sa|sc|c)ss$/,
           use: [
             !devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -61,6 +75,6 @@ module.exports = () => {
       ],
     },
     devtool: 'source-map',
-    plugins: [CopyWebpack, MiniCSSExtract, HTMLWebpackPlugin, StyleLinter],
+    plugins: [CopyWebpack, MiniCSSExtract, ...HTMLWebpackPlugin, StyleLinter],
   };
 };

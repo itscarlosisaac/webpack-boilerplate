@@ -8,18 +8,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 
-// const testFolder = path.resolve(__dirname, 'pages/');
-// fs.readdir(testFolder, (err, files) => files.forEach(file => console.log(file)));
-
-
-
-
-
-
 const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist');
 const devMode = process.env.NODE_ENV === 'development';
-const pagesFolder = path.resolve(__dirname, 'src/pages/');
+const viewsFolder = path.resolve(__dirname, 'src/views/');
 
 module.exports = () => {
   const MiniCSSExtract = new MiniCssExtractPlugin({
@@ -32,20 +24,20 @@ module.exports = () => {
   ]);
 
   const HTMLWebpackPlugin = [];
-  const pages = [
+  const views = [
     { name: 'index', src: 'index.pug' },
   ];
 
-  fs.readdirSync(pagesFolder).forEach(file => pages.push({ name: file.replace('.pug', ''), src: `pages/${file}` }));
+  fs.readdirSync(viewsFolder).forEach(file => views.push({ name: file.replace('.pug', ''), src: `views/${file}` }));
 
-  const exportPages = (name, entryPath) => (
+  const exportviews = (name, entryPath) => (
     HTMLWebpackPlugin.push(new HtmlWebpackPlugin({
       filename: `${name}.html`,
       template: path.join(srcDir, entryPath),
     }))
   );
 
-  pages.map(item => exportPages(item.name, item.src));
+  views.map(item => exportviews(item.name, item.src));
 
   const StyleLinter = new StyleLintPlugin();
 
@@ -75,7 +67,7 @@ module.exports = () => {
         },
         {
           test: /\.pug$/,
-          loader: ['html-loader', 'pug-html-loader'],
+          loader: ['raw-loader', 'pug-html-loader'],
         },
         {
           test: /\.(sa|sc|c)ss$/,
@@ -100,7 +92,14 @@ module.exports = () => {
       ],
     },
     devtool: 'cheap-module-eval-source-map',
-    plugins: [CopyWebpack, HMR, MiniCSSExtract, BSPlugin, ...HTMLWebpackPlugin, StyleLinter],
+    plugins: [
+      CopyWebpack,
+      HMR,
+      MiniCSSExtract,
+      BSPlugin,
+      ...HTMLWebpackPlugin,
+      StyleLinter,
+    ],
     devServer: {
       host: '0.0.0.0',
       historyApiFallback: true,
