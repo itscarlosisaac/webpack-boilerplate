@@ -6,10 +6,20 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const fs = require('fs');
+
+// const testFolder = path.resolve(__dirname, 'pages/');
+// fs.readdir(testFolder, (err, files) => files.forEach(file => console.log(file)));
+
+
+
+
+
 
 const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist');
 const devMode = process.env.NODE_ENV === 'development';
+const pagesFolder = path.resolve(__dirname, 'src/pages/');
 
 module.exports = () => {
   const MiniCSSExtract = new MiniCssExtractPlugin({
@@ -20,6 +30,22 @@ module.exports = () => {
   const CopyWebpack = new CopyWebpackPlugin([
     { from: path.resolve(srcDir, 'public'), to: 'public' },
   ]);
+
+  const HTMLWebpackPlugin = [];
+  const pages = [
+    { name: 'index', src: 'index.pug' },
+  ];
+
+  fs.readdirSync(pagesFolder).forEach(file => pages.push({ name: file.replace('.pug', ''), src: `pages/${file}` }));
+
+  const exportPages = (name, entryPath) => (
+    HTMLWebpackPlugin.push(new HtmlWebpackPlugin({
+      filename: `${name}.html`,
+      template: path.join(srcDir, entryPath),
+    }))
+  );
+
+  pages.map(item => exportPages(item.name, item.src));
 
   const StyleLinter = new StyleLintPlugin();
 
@@ -32,12 +58,6 @@ module.exports = () => {
   });
 
   const HMR = new webpack.HotModuleReplacementPlugin();
-  const HTMLWebpackPlugin = new HtmlWebpackPlugin({
-    meta: {
-      viewport: 'width=device-width, initial-scale=1',
-      charset: 'UTF-8',
-    },
-  });
 
   return {
     mode: 'development',
@@ -52,7 +72,12 @@ module.exports = () => {
           loader: 'babel-loader',
           test: /\.js$/,
           exclude: /node_modules/,
-        }, {
+        },
+        {
+          test: /\.pug$/,
+          loader: ['html-loader', 'pug-html-loader'],
+        },
+        {
           test: /\.(sa|sc|c)ss$/,
           use: [
             !devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -75,7 +100,7 @@ module.exports = () => {
       ],
     },
     devtool: 'cheap-module-eval-source-map',
-    plugins: [CopyWebpack, HMR, MiniCSSExtract, BSPlugin, HTMLWebpackPlugin, StyleLinter],
+    plugins: [CopyWebpack, HMR, MiniCSSExtract, BSPlugin, ...HTMLWebpackPlugin, StyleLinter],
     devServer: {
       host: '0.0.0.0',
       historyApiFallback: true,
