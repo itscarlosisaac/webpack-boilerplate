@@ -62,4 +62,4 @@ It uses the [Airbnb Javascript guidelines](https://github.com/airbnb/javascript)
 ## TODO
 - Create react branch
 - Create vue branch
-- Create Pug/Jade branch
+- ~~Create Pug/Jade branch~~
