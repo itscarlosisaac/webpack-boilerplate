@@ -7,7 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist');
-const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = () => {
   const MiniCSSExtract = new MiniCssExtractPlugin({
@@ -28,11 +27,12 @@ module.exports = () => {
     },
     hash: true,
     minify: true,
+    template: path.resolve(srcDir, 'index.html'),
   });
 
   return {
     mode: 'production',
-    entry: './src/app.js',
+    entry: './src/app.jsx',
     output: {
       filename: 'app.bundle.[hash].js',
       path: distDir,
@@ -41,14 +41,11 @@ module.exports = () => {
       rules: [
         {
           loader: 'babel-loader',
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
           exclude: /node_modules/,
         }, {
           test: /\.(sa|sc|c)ss$/,
-          use: [
-            !devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader', 'postcss-loader', 'sass-loader',
-          ],
+          use: ['css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
         },
         {
           test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -59,6 +56,9 @@ module.exports = () => {
           use: 'file-loader?limit=10000&mimetype=application/font-woff&name=&name=/css/webfonts/[name].[ext]',
         },
       ],
+    },
+    resolve: {
+      extensions: ['.js', '.jsx'],
     },
     devtool: 'source-map',
     plugins: [CopyWebpack, MiniCSSExtract, HTMLWebpackPlugin, StyleLinter],

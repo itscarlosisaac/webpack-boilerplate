@@ -9,12 +9,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const srcDir = path.resolve(__dirname, 'src');
 const distDir = path.resolve(__dirname, 'dist');
-const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = () => {
   const MiniCSSExtract = new MiniCssExtractPlugin({
-    filename: '[name].css',
-    chunkFilename: '[id].css',
+    filename: 'output.css',
   });
 
   const CopyWebpack = new CopyWebpackPlugin([
@@ -37,11 +35,12 @@ module.exports = () => {
       viewport: 'width=device-width, initial-scale=1',
       charset: 'UTF-8',
     },
+    template: path.resolve(srcDir, 'index.html'),
   });
 
   return {
     mode: 'development',
-    entry: './src/app.js',
+    entry: './src/app.jsx',
     output: {
       filename: 'app.bundle.js',
       path: distDir,
@@ -50,13 +49,12 @@ module.exports = () => {
       rules: [
         {
           loader: 'babel-loader',
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
           exclude: /node_modules/,
         }, {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            !devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader', 'postcss-loader', 'sass-loader',
+            'css-hot-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader',
           ],
         },
         {
@@ -74,13 +72,17 @@ module.exports = () => {
         },
       ],
     },
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
     devtool: 'cheap-module-eval-source-map',
-    plugins: [CopyWebpack, HMR, MiniCSSExtract, BSPlugin, HTMLWebpackPlugin, StyleLinter],
+    plugins: [CopyWebpack, MiniCSSExtract, BSPlugin, HTMLWebpackPlugin, StyleLinter, HMR],
     devServer: {
       host: '0.0.0.0',
       historyApiFallback: true,
       contentBase: path.resolve(__dirname, 'src'),
       watchContentBase: true,
+      hot: true,
       stats: {
         colors: true,
         chunks: false,

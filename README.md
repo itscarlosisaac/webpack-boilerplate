@@ -12,7 +12,7 @@ It uses the [Airbnb Javascript guidelines](https://github.com/airbnb/javascript)
 
 ```yarn run prestart``` - It runs before each action to run eslint validator on the code.
 
-```yarn run dev``` - To run the development action.
+```yarn run start``` - To run the development action.
 
 ```yarn run build``` - To run the build action to the dist folder.
 
@@ -40,7 +40,6 @@ It uses the [Airbnb Javascript guidelines](https://github.com/airbnb/javascript)
   "html-webpack-plugin": "^3.2.0",
   "mini-css-extract-plugin": "^0.4.1",
   "node-sass": "^4.9.3",
-  "nodemon": "^1.18.3",
   "normalize.css": "^8.0.0",
   "postcss-loader": "^3.0.0",
   "pre-commit": "^1.2.2",
@@ -60,6 +59,6 @@ It uses the [Airbnb Javascript guidelines](https://github.com/airbnb/javascript)
 
 
 ## TODO
-- Create react branch
-- Create vue branch
+- ~~Create react branch~~
 - ~~Create Pug/Jade branch~~
+- Create vue branch
