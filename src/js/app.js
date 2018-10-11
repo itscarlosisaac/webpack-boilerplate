@@ -1,1 +1,1 @@
-console.log("From main JS")
+console.log('From main JS');
