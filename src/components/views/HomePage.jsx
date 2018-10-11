@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 export default () => (
   <Fragment>
-    <section className="app__container">
+    <section className="home__container">
       <header>
         <img
           width={200}
